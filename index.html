@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dim Tu Tac Restaurant - Mini App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 15px;
+      background: #fff8f0;
+      color: #333;
+      line-height: 1.5;
+    }
+    h1, h2 {
+      color: #d35400;
+      text-align: center;
+      margin-top: 30px;
+    }
+    .section {
+      margin-bottom: 40px;
+      padding: 15px;
+      background: #f9f0e6;
+      border-radius: 8px;
+      box-shadow: 0 0 6px #f0d6b5;
+    }
+    /* Menu sản phẩm */
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #e0cba8;
+      padding: 10px 0;
+    }
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+    .menu-item-name {
+      font-weight: bold;
+    }
+    /* Form liên hệ */
+    form label {
+      display: block;
+      margin: 10px 0 5px 0;
+      font-weight: bold;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    form button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      background: #d35400;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    form button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+    /* Thông tin & giới thiệu */
+    p {
+      margin: 0 0 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dim Tu Tac Restaurant</h1>
+
+  <!-- Menu sản phẩm -->
+  <section class="section" id="menu">
+    <h2>Menu Sản Phẩm</h2>
+    <div class="menu-item">
+      <div class="menu-item-name">Há Cảo</div>
+      <div class="menu-item-price">60,000đ</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Vịt Quay Bắc Kinh/div>
+      <div class="menu-item-price">780,000đ</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Miến Xào Cua</div>
+      <div class="menu-item-price">350,000đ</div>
+    </div>
+  </section>
+
+  <!-- Thông tin nhà hàng -->
+  <section class="section" id="info">
+    <h2>Thông Tin Nhà Hàng</h2>
+    <p>Địa chỉ: 55 Đông Du, Phường Sài Gòn, TP. HCM</p>
+    <p>Điện thoại: 0123 456 789</p>
+    <p>Giờ mở cửa: 9:00 - 22:00 hàng ngày</p>
+  </section>
+
+  <!-- Giới thiệu dịch vụ -->
+  <section class="section" id="services">
+    <h2>Giới Thiệu Dịch Vụ</h2>
+    <p>Dim Tu Tac, nơi khai phá những giới hạn mới. Từ ẩm thực truyền thống chúng tôi được truyền cảm hứng để mang đến cho thực khách sự kết hợp độc đáo, nâng tầm nghệ thuật ẩm thực Quảng Đông đương đại và Dim Sum. Đội ngũ đầu bếp chuyên nghiệp và các nhân viên tự hào đem đến những trải nghiệm thú vị và ngày càng hoàn thiện hơn mỗi ngày. Từ khâu chọn lựa nguyên liệu cho đến khâu trình bày sản phẩm, chúng tôi luôn nỗ lực tạo nên những điểm nhấn hoàn toàn khác biệt mà những người khác có thể bỏ qua.</p>
+    <p> Đến với Dim Tu Tac chính là thưởng thức nghệ thuật ẩm thực tinh xảo bằng tất cả tâm huyết và tinh thần của chúng tôi.</p>
+  </section>
+
+  <!-- Form liên hệ -->
+  <section class="section" id="contact">
+    <h2>Liên Hệ Với Chúng Tôi</h2>
+    <form id="contactForm">
+      <label for="name">Họ và tên:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="phone">Số điện thoại:</label>
+      <input type="tel" id="phone" name="phone" required pattern="[0-9]{9,12}" placeholder="0123456789" />
+
+      <label for="message">Nội dung:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Gửi Liên Hệ</button>
+    </form>
+    <p id="formStatus" style="color: green; margin-top: 10px;"></p>
+  </section>
+
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Lấy dữ liệu form
+      const name = contactForm.name.value.trim();
+      const phone = contactForm.phone.value.trim();
+      const message = contactForm.message.value.trim();
+
+      if (!name || !phone || !message) {
+        alert('Vui lòng điền đầy đủ thông tin.');
+        return;
+      }
+
+      // Giả lập gửi dữ liệu (thường là gửi lên server hoặc Google Sheets)
+      formStatus.textContent = 'Đang gửi...';
+
+      setTimeout(() => {
+        formStatus.textContent = 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất.';
+        contactForm.reset();
+      }, 1500);
+    });
+  </script>
+  
+</body>
+</html>
